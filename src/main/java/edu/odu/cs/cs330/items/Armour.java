@@ -44,9 +44,16 @@ public class Armour extends Item {
      * Default to a armour with an empty name, zero durability, zero defense,
      * blank material, no modifier a zero modifier level, and a blank element.
      */
-    public Armour()
+    public Armour()////////////////////////////////////////////////////////////////////////////////////////////////////////
     {
+        super();
 
+        durability = 0;
+        defense = 0;
+        material = "";
+        modifier = "";
+        modifierLevel = 0;
+        element = "";
     }
 
     /**
@@ -54,8 +61,15 @@ public class Armour extends Item {
      *
      * @param src armour to duplicate
      */
-    public Armour(Armour src)
+    public Armour(Armour src)//////////////////////////////////////////////////////////////////////////////////////////////
     {
+        this.name = src.name;
+        this.durability = src.durability;
+        this.defense = src.defense ;
+        this.material = src.material ;
+        this.modifier = src.modifier ;
+        this.modifierLevel = src.modifierLevel ;
+        this.element = src.element ;        
 
     }
 
@@ -189,8 +203,16 @@ public class Armour extends Item {
      * Read Armour attributes.
      */
     @Override
-    public void read(Scanner snr)
+    public void read(Scanner snr)//////////////////////////////////////////////////////////////////////////////////////////
     {
+       // a name, material, durability, defense, modifier, modifier level, and element
+       this.name = snr.next();
+       this.material = snr.next();
+       this.durability = snr.nextInt();
+       this.defense = snr.nextInt();
+       this.modifier = snr.next();
+       this.modifierLevel = snr.nextInt();
+       this.element = snr.next();  
 
     }
 
@@ -210,13 +232,18 @@ public class Armour extends Item {
      * @param rhs object for which a comparison is desired
      */
     @Override
-    public boolean equals(Object rhs)
+    public boolean equals(Object rhs)//////////////////////////////////////////////////////////////////////////////////////
     {
         if (!(rhs instanceof Armour)) {
             return false;
         }
 
         Armour rhsItem = (Armour) rhs;
+
+        //CS330-Review 4: Example 1 (Player.java)
+        if (this.name.equals(rhsItem.name) && this.material.equals(rhsItem.material) && this.modifier.equals(rhsItem.modifier) && this.element.equals(rhsItem.element)) {
+            return true;
+        }
 
         // Replace the next line
         return false;
@@ -227,18 +254,40 @@ public class Armour extends Item {
      * hash codes.
      */
     @Override
-    public int hashCode()
+    public int hashCode()//////////////////////////////////////////////////////////////////////////////////////////////////
     {
-        return -1;
+        return this.name.hashCode()
+        + this.material.hashCode()
+        + this.modifier.hashCode()
+        + this.element.hashCode();
     }
 
     /**
      * *Print* one Armour.
      */
     @Override
-    public String toString()
+    public String toString()///////////////////////////////////////////////////////////////////////////////////////////////
     {
-        return "";
+         /*
+            Nme: Boots
+            Dur: 100
+            Def: 10
+            Mtl: Diamond
+            Mdr: Protection (Lvl 3)
+            Emt: lightning
+        
+         */
+
+         StringBuilder strBui =  new StringBuilder();
+
+         strBui.append("  Nme: " + this.name + "\n");
+         strBui.append("  Dur: " + this.durability + "\n");
+         strBui.append("  Def: " + this.defense + "\n");
+         strBui.append("  Mtl: " + this.material + "\n");
+         strBui.append("  Mdr: " + this.modifier + " (Lvl " + this.modifierLevel + ")" + "\n");
+         strBui.append("  Emt: " + this.element + "\n");
+
+         return strBui.toString();
     }
 }
 

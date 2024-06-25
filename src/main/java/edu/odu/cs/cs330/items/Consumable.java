@@ -36,8 +36,11 @@ public class Consumable extends Item {
      *
      * @param src consumable item to duplicate
      */
-    public Consumable(Consumable src)
+    public Consumable(Consumable src)//////////////////////////////////////////////////////////////////////////////////////
     {
+        this.name = src.name;
+        this.effect = src.effect;
+        this.uses = src.uses;
 
     }
 
@@ -102,10 +105,10 @@ public class Consumable extends Item {
      * Clone--i.e., copy--this Consumable Item.
      */
     @Override
-    public Item clone()
+    public Item clone()////////////////////////////////////////////////////////////////////////////////////////////////////
     {
         // Replace the next line
-        return null;
+        return new Consumable(this);
     }
 
     /**
@@ -114,13 +117,16 @@ public class Consumable extends Item {
      * @param rhs object for which a comparison is desired
      */
     @Override
-    public boolean equals(Object rhs)
+    public boolean equals(Object rhs)//////////////////////////////////////////////////////////////////////////////////////
     {
         if (!(rhs instanceof Consumable)) {
             return false;
         }
 
         Consumable rhsItem = (Consumable) rhs;
+        if (this.name.equals(rhsItem.name) && this.effect.equals(rhsItem.effect)) {
+            return true;
+        }
 
         // Replace the next line
         return false;
@@ -133,18 +139,32 @@ public class Consumable extends Item {
      * return the result.
      */
     @Override
-    public int hashCode()
+    public int hashCode()//////////////////////////////////////////////////////////////////////////////////////////////////
     {
         // Replace the next line
-        return -1;
+        return this.name.hashCode()
+        + this.effect.hashCode();
     }
 
     /**
      * *Print* the Consumable Item.
      */
     @Override
-    public String toString()
+    public String toString()///////////////////////////////////////////////////////////////////////////////////////////////
     {
-        return "";
+        /*  Nme: Speed-II-Potion
+            Eft: Spd*2
+            Use: 1
+            Qty: 1
+        */
+
+        StringBuilder strBui =  new StringBuilder();
+
+       strBui.append("  Nme: "+ this.name+ "\n");
+       strBui.append("  Eft: " + this.effect + "\n");
+       strBui.append("  Use: " + this.uses + "\n");
+
+
+        return strBui.toString();
     }
 }
